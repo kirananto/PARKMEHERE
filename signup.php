@@ -6,6 +6,9 @@
   include 'sql.php';
   session_start();
   ?>
+  <link rel="stylesheet" href="style1.css">
+  <script src="dist/sweetalert.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="dist/sweetalert.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
   <style>
@@ -130,20 +133,21 @@ $("#passwordConfirm").on("keyup", function (e) {
       $password = $_POST['password'];
       $sql1="select * from signup where Phone like '%$phoneno%';";
       $result=mysqli_query($con,$sql1);
-      if(mysqli_num_rows($result)<=0)
+      if(mysqli_num_rows($result)==0)
       {
-        $sql = "INSERT INTO `signup`(`Name`, `Phone`,`Username`, `Password`) VALUES ($name,$username,$phoneno,$password)";
+        $sql = "insert into signup values ('$name','$phoneno','$username','$password');";
         if(mysqli_query($con,$sql)){
               $_SESSION['user']=$username;
+                echo "<script type='text/javascript'>swal('DONE', ' Successfully Registered', 'success')</script>";
               header('location:panel.php');
               exit();
         }
         else{
-          //echo 'failure';
+            echo "<script type='text/javascript'>swal('Sorry', '  QUERY ERROR', 'error')</script>";
         }
       }
       else
-        echo "AlreadyDone";
+        echo "<script type='text/javascript'>swal('Sorry', '  Already Registered', 'error')</script>";
 
     }
     ?>

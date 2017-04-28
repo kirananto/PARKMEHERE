@@ -18,6 +18,9 @@ echo $succ;
 <html>
 
 <head>
+  <link rel="stylesheet" href="style1.css">
+  <script src="dist/sweetalert.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="dist/sweetalert.css">
   <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
@@ -97,7 +100,7 @@ echo $succ;
 
 function booknow(i)
 {
-window.location = "/"+i;
+window.location = "http://127.0.0.1/albin/bookingpage.php?SlotNo="+i;
 }
 </script>
  <!-- Starting for handling post request -->
@@ -110,6 +113,8 @@ window.location = "/"+i;
         $res=mysqli_query($con,"SELECT * FROM `home` WHERE TimeFrom < '$start_time' AND TimeTo > '$start_time' AND  TimeFrom < '$end_time' AND TimeTo > '$end_time';");
         if($res!=null)
         {
+          $_SESSION['start_time']=$start_time;
+            $_SESSION['end_time']=$end_time;
           echo '<table class="table table-hover"><thead><tr><th>Slot Number</th><th>Slots Available</th><th>Status</th></tr></thead><tbody>';
         while($r=(mysqli_fetch_array($res)))
         {
