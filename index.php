@@ -85,7 +85,7 @@
           </form>
         </div>
       </div>
-      <a href="#!">Create account</a>
+      <a href="signup.php">Create account</a>
     </center>
     <?php
     if(isset($_POST['btn_login']))
@@ -100,7 +100,7 @@
         $pass = $ar['Password'];
         if( ($username === $user) &&( $password === $pass))
         {
-          $_SESSION['user']=$user;
+          $_SESSION['user']=$username;
           header('location:panel.php');
           exit();
         }
