@@ -65,7 +65,7 @@
             <div class='row'>
               <div class='input-field col s12'>
                 <input class='validate' type='text' name='name' id='name' />
-                <label for='name'>Enter your Name</label>
+                <label for='name'>Enter your Username</label>
               </div>
             </div>
 
@@ -93,13 +93,13 @@
     <?php
     if(isset($_POST['btn_login']))
     {
-      $username = $_POST['name'];
+      $username = $_POST['username'];
       $password = $_POST['password'];
       $sql = mysqli_query($con,"SELECT * FROM `signup`");
       $flag = 0;
       while($ar=(mysqli_fetch_array($sql)))
       {
-        $user = $ar['Name'];
+        $user = $ar['Username'];
         $pass = $ar['Password'];
         if( ($username === $user) &&( $password === $pass))
         {
