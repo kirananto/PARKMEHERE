@@ -75,7 +75,7 @@ if(!empty($_GET))
       <img class="responsive-img" style="width: 250px;" src="assets/images/logo.jpg" />
       <div class="section"></div>
 
-      <h5 class="indigo-text">Confirm Your Booking</h5>
+      <h5 class="indigo-text">Cancel Your Booking</h5>
       <div class="section"></div>
 
       <div class="container">
@@ -107,10 +107,10 @@ if(!empty($_GET))
                 $sql1="select * from signup where Phone like '%$phoneno%';";
                 $result=mysqli_query($con,$sql1);
                 if(mysqli_num_rows($result)>0) {
-                $sql = "UPDATE `home` SET `SlotNo`=$SlotNo, `Book`= '$booked',`TimeFrom`='$start_time',`TimeTo`='$end_time',`Name`='$name',`Phoneno`=$phoneno Where `SlotNo` = $SlotNo";
+                $sql = "DELETE FROM `home` WHERE SlotNo = $SlotNo";
                 if(mysqli_query($con,$sql))
                 {
-                        echo "<script type='text/javascript'>swal('DONE', ' Successfully Booked', 'success')</script>";
+                        echo "<script type='text/javascript'>swal('DONE', ' Successfully Cancelled', 'success')</script>";
                       header('location:panel.php');
                       exit();
                 }

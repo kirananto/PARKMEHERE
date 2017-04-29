@@ -64,7 +64,7 @@
 
             <div class='row'>
               <div class='input-field col s12'>
-                <input class='validate' type='text' name='name' id='name' />
+                <input class='validate' type='text' name='username' id='username' />
                 <label for='name'>Enter your Username</label>
               </div>
             </div>
@@ -101,10 +101,12 @@
       {
         $user = $ar['Username'];
         $pass = $ar['Password'];
+        $name = $ar['Name'];
         if( ($username === $user) &&( $password === $pass))
         {
           $_SESSION['user']=$username;
-          header('location:panel.php');
+          $_SESSION['name']=$name;
+          header('location:panel.php  ?>');
           exit();
         }
       }

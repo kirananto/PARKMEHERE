@@ -14,6 +14,8 @@ if(!isset($_SESSION['user']))
   });</script>";
 echo $succ;
 }
+
+        $name = $_SESSION['name'];
 ?>
 <html>
 
@@ -67,7 +69,7 @@ echo $succ;
       <div class="section"></div>
 
       <div class="container">
-        <div class="z-depth-1 grey lighten-4 row" style="width:50%; display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
+        <div class="z-depth-1 grey lighten-4 row" style="width:100%; display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
 
                     <form class="col s12" method="post">
 
@@ -100,7 +102,12 @@ echo $succ;
 
 function booknow(i)
 {
-window.location = "http://127.0.0.1/albin/bookingpage.php?SlotNo="+i;
+  window.location = "/albin/bookingpage.php?SlotNo="+i;
+}
+
+function cancelbook(i)
+{
+  window.location = "/albin/cancelpage.php?SlotNo="+i;
 }
 </script>
  <!-- Starting for handling post request -->
@@ -134,6 +141,27 @@ window.location = "http://127.0.0.1/albin/bookingpage.php?SlotNo="+i;
     </center>
 
     <div class="section"></div>
+    <?php
+            $sql=mysqli_query($con,"select * from home where Name = '$name' and `Book` = 'Booked'");
+            if($sql!=null)
+            {
+              echo '<div class="container">
+                <div class="z-depth-1 grey lighten-4 row" style="width:100%; display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
+
+                            <div class="col s12">
+
+          <div class="row">';
+              echo '<table class="table table-hover"><thead><tr><th>Slot Number</th><th>Slots Available</th><th>Status</th></tr></thead><tbody>';
+            while($r=(mysqli_fetch_array($sql)))
+            {
+              echo '<tr><td>'.$r['SlotNo'].'</td><td>'.$r['Slot_Avail'].'</td><td>'.$r['Book'].'</td><td><a class="waves-effect waves-light btn" onclick="cancelbook(\''.$r['SlotNo'].'\');">CANCEL</a>
+    </td></tr>';
+            }
+            echo '</tbody>
+            </table></div></div></div></div>';
+
+            }
+     ?>
     <div class="section"></div>
   </main>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.min.js"></script>
