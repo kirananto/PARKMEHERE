@@ -142,9 +142,11 @@ function cancelbook(i)
 
     <div class="section"></div>
     <?php
+        if($name != null) {
             $sql=mysqli_query($con,"select * from home where Name = '$name' and `Book` = 'Booked'");
             if($sql!=null)
             {
+              if($sql->num_rows!= 0) {
               echo '<div class="container">
                 <div class="z-depth-1 grey lighten-4 row" style="width:100%; display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
 
@@ -161,6 +163,8 @@ function cancelbook(i)
             </table></div></div></div></div>';
 
             }
+          }
+          }
      ?>
     <div class="section"></div>
   </main>
