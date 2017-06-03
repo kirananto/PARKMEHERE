@@ -107,11 +107,30 @@ if(!empty($_GET))
                 $sql1="select * from signup where Phone like '%$phoneno%';";
                 $result=mysqli_query($con,$sql1);
                 if(mysqli_num_rows($result)>0) {
-                $sql = "DELETE FROM `home` WHERE SlotNo = $SlotNo";
+                $sql = "UPDATE `home` SET `Book`='Not Booked' WHERE SlotNo = $SlotNo";
                 if(mysqli_query($con,$sql))
                 {
-                        echo "<script type='text/javascript'>swal('DONE', ' Successfully Cancelled', 'success')</script>";
-                      header('location:panel.php');
+                  echo '<script> swal({
+  title: "Success....!!!",
+  text: "Do you want to go back to home page ?!",
+  type: "warning",
+  showCancelButton: true,
+  confirmButtonColor: "#DD6B55",
+  confirmButtonText: "Yes",
+  cancelButtonText: "Nope..",
+  closeOnConfirm: false,
+  closeOnCancel: false
+},
+function(isConfirm){
+  if (isConfirm) {
+    window.location.replace("panel.php");
+  } else {
+    swal("Cancelled", "Ohkay take more Time to Think.. :)", "error");
+  }
+});
+</script>';
+                      //echo "<script type='text/javascript'>swal('DONE', ' Successfully Cancelled', 'success')</script>";
+                      //header('location:panel.php');
                       exit();
                 }
                 else

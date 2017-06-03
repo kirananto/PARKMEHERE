@@ -110,8 +110,26 @@ if(!empty($_GET))
                 $sql = "UPDATE `home` SET `SlotNo`=$SlotNo, `Book`= '$booked',`TimeFrom`='$start_time',`TimeTo`='$end_time',`Name`='$name',`Phoneno`=$phoneno Where `SlotNo` = $SlotNo";
                 if(mysqli_query($con,$sql))
                 {
-                        echo "<script type='text/javascript'>swal('DONE', ' Successfully Booked', 'success')</script>";
-                      header('location:panel.php');
+                  echo '<script> swal({
+  title: "Success....!!!",
+  text: "Do you want to go back to home page ?!",
+  type: "warning",
+  showCancelButton: true,
+  confirmButtonColor: "#DD6B55",
+  confirmButtonText: "Yes",
+  cancelButtonText: "Nope..",
+  closeOnConfirm: false,
+  closeOnCancel: false
+},
+function(isConfirm){
+  if (isConfirm) {
+    window.location.replace("panel.php");
+  } else {
+    swal("Cancelled", "Ohkay take more Time to Think.. :)", "error");
+  }
+});</script>';
+                        //echo "<script type='text/javascript'>swal('DONE', ' Successfully Booked', 'success')</script>";
+                      //header('location:panel.php');
                       exit();
                 }
                 else
